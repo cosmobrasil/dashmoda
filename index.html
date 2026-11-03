@@ -152,6 +152,13 @@
   .modal p,.modal li{font-size:12px;line-height:1.5;color:var(--muted)}
   .modal ul{margin:4px 0;padding-left:18px}
   .modal .close{margin-top:18px}
+  .howto{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column}
+  .howto li{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+  .howto li:first-child{border-top:0}
+  .howto .n{flex:none;width:24px;height:24px;border-radius:999px;background:var(--mint);color:var(--green-2);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .howto .how-body{flex:1;min-width:0}
+  .howto .how-body b{display:block;font-size:13px;color:var(--ink);margin-bottom:2px;line-height:1.3}
+  .howto .how-body p{font-size:11.5px;line-height:1.5;color:var(--muted);margin:0}
   .fan{width:100%;height:auto;display:block;margin:6px 0 0}
   .fan .fl{stroke:#E3EBE1;stroke-width:1}
   .fan .ft{font-size:8px;fill:var(--muted);font-weight:700}
@@ -239,7 +246,7 @@
         <button class="seg-btn" data-view="brusque" aria-pressed="false">Brusque</button>
       </div>
       <span class="chip">Protótipo v1</span>
-      <button class="btn-ghost" id="aboutBtn" type="button">Sobre os dados</button>
+      <button class="btn-ghost" id="aboutBtn" type="button">Como ler os cards</button>
     </div>
   </header>
 
@@ -253,29 +260,107 @@
 
 <dialog id="about">
   <div class="modal">
-    <h2>Sobre os dados</h2>
-    <p>Protótipo do <b>Índice de Circularidade do Produto</b> para a região de Brusque. Nenhuma empresa é identificada; tudo é agregado.</p>
-    <h3>O índice</h3>
-    <p>Média dos pontos das empresas no instrumento de cinco áreas — Entrada, Gestão de Resíduo, Saída do Produto, Vida do Produto e Monitoramento —, convertida para 0–100. As cinco notas vêm das respostas do instrumento: 15 critérios, 3 pontos por eixo.</p>
-    <h3>Notas por eixo</h3>
-    <p>Entrada e Gestão de Resíduo: 1 pergunta (0–3). Vida do Produto, Monitoramento e Saída: 3 perguntas sim/não (1 ponto cada). “Não sei” conta como 0; na pergunta de aterro, “não” é a resposta positiva. Base: 15 relatórios completos (10 Brusque + 5 região); as 5 avaliações simplificadas ficam fora do índice.</p>
-    <h3>Cenários futuros</h3>
-    <p>Os cards da faixa “Futuro” são simulações, não previsões. 2026 é o dado do piloto; 2027 e 2028 aplicam +1 ponto por empresa em 1, 2 ou 3 eixos (+6,7 p.p. no índice por eixo). A migração de faixas usa o cenário base (+13,3 p.p.). O potencial por eixo é o ganho máximo teórico se todas as empresas fossem a 3/3, com a meta marcada.</p>
-    <h3>Leituras estratégicas</h3>
-    <p>Os três cards finais são interpretações qualitativas geradas sobre os mesmos dados: contradições e riscos de governança que os gráficos não enunciam sozinhos (processo × produto, comunicação sem rastreabilidade, meta agregada que pode ser cumprida pelas alavancas mais baratas). São hipóteses de leitura, não dado nem previsão; validar em campo.</p>
-    <h3>Recorte</h3>
-    <p><b>Região:</b> relatórios completos de empresas de Brusque, Gaspar, Ilhota e Guabiruba. <b>Brusque:</b> recorte municipal. As avaliações simplificadas ficam fora do índice. Há divergência de CNPJ (FRANCO/TEXFAN) e duplicata de relatório (MAUELA).</p>
-    <h3>Cobertura</h3>
-    <p>Brusque: 0,20% das matrizes de moda do município. O universo de Gaspar, Ilhota e Guabiruba ainda não está disponível — por isso a cobertura regional não é calculada.</p>
-    <h3>Limitações</h3>
-    <ul>
-      <li>Notas por eixo calculadas a partir das respostas (régua de 15 critérios); 5 relatórios simplificados ficam fora do índice; sem série temporal; sem porte confiável; sem benchmark oficial; target provisório.</li>
-      <li>Amostra de piloto, não aleatória. Se fosse aleatória, o IC95% do índice regional seria ≈ 23,9–38,3; não é.</li>
-      <li>O porte/faturamento da base de Brusque é implausível e não é usado para ponderação.</li>
-      <li>Prioridade das recomendações é do template, não urgência da empresa.</li>
-    </ul>
-    <h3>Fontes</h3>
-    <p>Planilha “circularidade sc.xlsx”; export de respostas “respostas_limpas.csv” (plataforma, 03/11/2026 — testes, não-Moda e duplicata descartados); base “brusque dados.csv”; API EmpresAqui (consulta por CNPJ, 26/10/2026).</p>
+    <h2>Como ler os cards</h2>
+    <p>Um guia rápido do que cada card mostra — e do que ele <b>não</b> diz. Nenhuma empresa é identificada; tudo é agregado. <b>Protótipo piloto 2026</b>, não um retrato definitivo do setor.</p>
+
+    <ol class="howto">
+      <li>
+        <span class="n">1</span>
+        <div class="how-body">
+          <b>Índice de Circularidade do Produto — “Um número, uma decisão”</b>
+          <p>O número grande é a média dos pontos das empresas no instrumento (0–100). Ao lado: mediana, meta provisória, o gap até a meta e a comparação com o outro recorte (Região × Brusque).</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <div class="how-body">
+          <b>Pontuação por indicadores</b>
+          <p>Mostra, para cada um dos cinco eixos (Entrada, Gestão de Resíduo, Saída do Produto, Vida do Produto e Monitoramento), o percentual do máximo de 3 pontos alcançado. Barra mais cheia = eixo mais maduro.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <div class="how-body">
+          <b>Onde o produto perde</b>
+          <p>É o espelho do card anterior: quanto cada eixo ainda deixa de alcançar do máximo. O eixo com a barra mais longa é a maior oportunidade de ganho.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div class="how-body">
+          <b>Como o índice se espalha</b>
+          <p>Agrupa as empresas por faixa do índice (0–20, 21–40…). Mostra se a base está concentrada em pontuações baixas, com a mediana destacada no centro do gráfico.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">5</span>
+        <div class="how-body">
+          <b>Tipo de ação</b>
+          <p>Classifica as recomendações por prazo — curto, médio, longo e não informado. O número em destaque é a fatia de ações de curto prazo, com a abertura por eixo logo abaixo.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">6</span>
+        <div class="how-body">
+          <b>Trajetória até 2028</b>
+          <p>Simula o índice em três ritmos de adoção de critérios (conservador, base e acelerado) até 2028, comparado à meta. É simulação, não previsão.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">7</span>
+        <div class="how-body">
+          <b>Migração de faixas</b>
+          <p>Mostra como as empresas mudariam de faixa do índice entre hoje (2026) e 2028 no cenário base — por exemplo, se a faixa 0–20 se esvaziaria.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">8</span>
+        <div class="how-body">
+          <b>Potencial por eixo</b>
+          <p>Quanto o índice ganharia, em pontos percentuais, se todas as empresas chegassem a 3/3 em cada eixo. A linha tracejada marca o que falta para a meta.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">9</span>
+        <div class="how-body">
+          <b>Onde o piloto está</b>
+          <p>Distribui os relatórios completos por município e traz a cobertura da amostra em relação ao universo de empresas de moda.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">10</span>
+        <div class="how-body">
+          <b>Hipóteses de alavanca</b>
+          <p>Ideias de intervenção por eixo que o piloto sugere olhar. São hipóteses para validar com a área de política — não é prescrição.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">11</span>
+        <div class="how-body">
+          <b>Confiança do dado</b>
+          <p>Resume o que sustenta e o que fragiliza a leitura: cobertura, lacunas, divergências e a ausência de identificação de empresas.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">12</span>
+        <div class="how-body">
+          <b>Onde a ação se concentra</b>
+          <p>Top 5 áreas por volume de recomendações. Mostra para onde a agenda prática do piloto mais aponta — e o peso do “produto” nela.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">13</span>
+        <div class="how-body">
+          <b>Leituras estratégicas (3 cards)</b>
+          <p>Três sínteses qualitativas geradas sobre os mesmos dados: contradições e riscos que os gráficos não enunciam sozinhos (processo × produto, comunicação sem lastro, meta batida pelas alavancas mais baratas). São hipóteses de leitura — não dado nem previsão; validar em campo.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Leitura geral</h3>
+    <p>Amostra de piloto (não aleatória), sem série temporal, porte confiável ou benchmark oficial; meta provisória. A prioridade das recomendações vem do template, não da urgência de cada empresa.</p>
+    <p style="margin-top:6px"><b>Fontes:</b> “circularidade sc.xlsx”; export “respostas_limpas.csv” (plataforma, 03/11/2026); “brusque dados.csv”; API EmpresAqui (26/10/2026).</p>
+
     <button class="btn-ghost close" id="closeAbout" type="button">Fechar</button>
   </div>
 </dialog>

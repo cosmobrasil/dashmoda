@@ -18,7 +18,7 @@ Abra `index.html` no navegador (duplo clique ou `open index.html`). É um arquiv
 - **Leitura estratégica (faixa final):** três avaliações qualitativas geradas sobre o dado — *processo × produto*, *comunicação sem lastro* e *meta gameável sem tocar no produto* — cada uma com evidência curta e um movimento sugerido.
 - **Alavancas:** hipóteses para discussão.
 - **Qualidade:** limitações explícitas.
-- **Toggle Região/Brusque** e modal “Sobre os dados”.
+- **Toggle Região/Brusque** e modal “Como ler os cards” (guia explicativo de cada card).
 
 ## Dados
 
