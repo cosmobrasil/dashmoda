@@ -192,6 +192,13 @@
   .strategy .evidence b{color:var(--ink);font-variant-numeric:tabular-nums}
   .strategy .move{background:#FDFCF7;border:1px solid #E4DFCB;border-radius:12px;padding:9px 10px;font-size:10.5px;line-height:1.4;color:var(--ink);margin-top:auto}
   .strategy .move b{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:3px}
+  .reco-list{margin-top:12px;display:flex;flex-direction:column;gap:11px}
+  .reco-row{display:grid;grid-template-columns:160px 1fr 64px 76px;gap:12px;align-items:center;font-size:11px}
+  .reco-name{font-weight:800;color:var(--ink);line-height:1.15}
+  .reco-bar{height:11px;background:#EEF3EC;border-radius:999px;overflow:hidden}
+  .reco-bar span{display:block;height:100%;background:var(--green);border-radius:999px}
+  .reco-val{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .reco-n{text-align:right;color:var(--muted);font-size:10px}
   @media (max-width:1100px){
     .axis-grid{grid-template-columns:repeat(3,1fr)}
     .c5,.c7{grid-column:span 12}
@@ -297,7 +304,14 @@ const DATA = {
       {name:"Monitoramento", curto:49.2}
     ],
     municipalities: {Brusque:10, Gaspar:3, Ilhota:1, Guabiruba:1},
-    coverage: "0,20% das matrizes de moda de Brusque. Universo regional pendente."
+    coverage: "0,20% das matrizes de moda de Brusque. Universo regional pendente.",
+    recos: [
+      {name:"Saída do Produto", pct:30.0, n:71},
+      {name:"Monitoramento", pct:26.2, n:62},
+      {name:"Vida do Produto", pct:23.6, n:56},
+      {name:"Gestão de Resíduo", pct:11.8, n:28},
+      {name:"Entrada", pct:8.4, n:20}
+    ]
   },
   brusque: {
     n: 10, index: 26.0, median: 27, le40: 100.0,
@@ -323,7 +337,14 @@ const DATA = {
       {name:"Monitoramento", curto:48.7}
     ],
     municipalities: {Brusque:10},
-    coverage: "0,18% das matrizes de moda de Brusque. Universo regional pendente."
+    coverage: "0,18% das matrizes de moda de Brusque. Universo regional pendente.",
+    recos: [
+      {name:"Saída do Produto", pct:30.6, n:44},
+      {name:"Monitoramento", pct:27.1, n:39},
+      {name:"Vida do Produto", pct:23.6, n:34},
+      {name:"Gestão de Resíduo", pct:11.1, n:16},
+      {name:"Entrada", pct:7.6, n:11}
+    ]
   }
 };
 const TARGET = 45;
@@ -533,6 +554,27 @@ function territory(d,view){
   </section>`;
 }
 
+function recommendations(d,view){
+  const total=d.recos.reduce((a,r)=>a+r.n,0);
+  const saida=d.recos.find(r=>r.name==="Saída do Produto");
+  const vida=d.recos.find(r=>r.name==="Vida do Produto");
+  const produto=saida.pct+vida.pct;
+  return `<section class="card c12">
+    ${cardTop("Recomendações","Onde a ação se concentra",view==="regional"?"Região":"Brusque")}
+    <p class="muted">Top 5 áreas por volume de recomendações — ${view==="regional"?"15 empresas completas":"10 empresas de Brusque"} · ${total} recomendações.</p>
+    <div class="reco-list">
+      ${d.recos.map(r=>`
+        <div class="reco-row">
+          <span class="reco-name">${r.name}</span>
+          <div class="reco-bar"><span style="width:${r.pct}%"></span></div>
+          <b class="reco-val">${fmt1(r.pct)}%</b>
+          <span class="reco-n">${r.n} recom.</span>
+        </div>`).join("")}
+    </div>
+    <div class="insight" style="margin-top:14px"><b>Leitura:</b> Saída do Produto lidera com ${fmt1(saida.pct)}% das recomendações; somada a Vida do Produto, o “produto” responde por ${fmt1(produto)}% da agenda.</div>
+  </section>`;
+}
+
 function levers(){
   return `<section class="card c4">
     ${cardTop("Para discussão","Hipóteses de alavanca","não é prescrição")}
@@ -591,7 +633,7 @@ function render(view){
   subtitle.textContent = view==="regional"
     ? "Região de Brusque · Brusque, Gaspar, Ilhota e Guabiruba"
     : "Brusque · recorte do piloto regional";
-  app.innerHTML = hero(d,view)+scorecard(d)+gaps(d)+distribution(d)+priorities(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+strategic(d);
+  app.innerHTML = hero(d,view)+scorecard(d)+gaps(d)+distribution(d)+priorities(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+recommendations(d,view)+strategic(d);
   document.querySelectorAll(".seg-btn").forEach(b=>{
     const on=b.dataset.view===view;
     b.classList.toggle("is-active",on);
