@@ -4,7 +4,17 @@
 
 ## Como abrir
 
-Abra `index.html` no navegador (duplo clique ou `open index.html`). É um arquivo único, sem dependências externas, servidor ou build.
+- **Fonte legível:** `src/index.html` (é aqui que se edita).
+- **Publicado:** `index.html` (versão minificada, gerada pelo build).
+
+Para regenerar o `index.html` publicado após editar a fonte:
+
+```bash
+npm install
+npm run build
+```
+
+O resultado continua sendo um arquivo único, sem dependências externas nem servidor — a minificação acontece localmente, antes do deploy.
 
 ## O que tem
 

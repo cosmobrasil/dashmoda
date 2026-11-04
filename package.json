@@ -1,0 +1,12 @@
+{
+  "name": "dashmoda",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dashboard v1 — Índice de Circularidade do Produto (COSMOB BRASIL)",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "html-minifier-terser": "^7.2.0"
+  }
+}
