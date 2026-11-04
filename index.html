@@ -253,7 +253,6 @@
   <main id="app" class="grid" aria-live="polite"></main>
 
   <footer>
-    <span><b>Amostra:</b> 21 relatórios de 20 CNPJs — 15 completos (10 Brusque, 3 Gaspar, 1 Ilhota, 1 Guabiruba) e 5 simplificados; 1 CNPJ divergente; 1 duplicata. <b>Universo Brusque:</b> 30.258 CNPJs ativos; 5.594 matrizes de moda. <b>Sem nomes de empresas.</b></span>
     <span>Protótipo v1 · 29/10/2026</span>
   </footer>
 </div>
@@ -635,7 +634,6 @@ function territory(d,view){
       ${entries.map(([name,n])=>`<div class="mun-row"><span>${name}</span><div class="mun-bar"><span style="width:${n/total*100}%"></span></div><b>${fmt1(n/total*100)}%</b></div>`).join("")}
     </div>
     <div class="terr-note"><b>Cobertura:</b> ${d.coverage}</div>
-    <p class="fine" style="margin-top:auto">${view==="regional"?"Há divergência de CNPJ (FRANCO/TEXFAN).":"As empresas regionais ficam fora deste recorte."} Os bairros líderes de Brusque concentram 43,4% das matrizes de moda.</p>
   </section>`;
 }
 
