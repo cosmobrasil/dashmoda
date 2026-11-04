@@ -95,28 +95,6 @@
   .axis-bar{height:7px;background:#E6EEE4;border-radius:999px;overflow:hidden;margin-top:auto}
   .axis-bar span{display:block;height:100%;background:var(--green);border-radius:999px}
   .axis-note{font-size:9px;color:var(--muted)}
-  .gap-row{margin-top:10px}
-  .gap-head{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:800}
-  .gap-head b{font-variant-numeric:tabular-nums}
-  .gap-bar{height:8px;background:#EEF3EC;border-radius:999px;overflow:hidden;margin-top:4px}
-  .gap-bar span{display:block;height:100%;background:var(--red);border-radius:999px}
-  .gap-row.is-nd .gap-bar{background:repeating-linear-gradient(90deg,#E6EEE4 0 6px,#F7FAF5 6px 12px)}
-  .gap-note{font-size:9px;color:var(--muted);margin-top:2px}
-  .donut-wrap{display:flex;gap:18px;align-items:center;margin-top:10px;flex-wrap:wrap}
-  .donut{width:158px;height:158px;border-radius:50%;position:relative;flex:none;background:#EEF3EC}
-  .donut::after{content:"";position:absolute;inset:21px;background:var(--card);border-radius:50%}
-  .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:1}
-  .donut-center b{font-size:30px;line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
-  .donut-center small{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
-  .donut-legend{display:flex;flex-direction:column;gap:6px;font-size:10.5px;min-width:128px;flex:1}
-  .donut-legend .row{display:grid;grid-template-columns:8px 1fr auto;gap:6px;align-items:center;color:var(--muted)}
-  .donut-legend i{width:8px;height:8px;border-radius:50%}
-  .donut-legend b{color:var(--ink);font-variant-numeric:tabular-nums}
-  .dist-row{display:grid;grid-template-columns:44px 1fr 24px;gap:8px;align-items:center;margin:9px 0;font-size:11px}
-  .dist-bar{height:8px;background:#EEF3EC;border-radius:999px;overflow:hidden}
-  .dist-bar span{display:block;height:100%;border-radius:999px}
-  .dist-n{text-align:right;font-weight:800;color:var(--ink)}
-  .dist-foot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:9px;margin-top:9px;font-size:11px;color:var(--muted)}
   .mun-row{display:grid;grid-template-columns:82px 1fr 22px;gap:8px;align-items:center;margin:8px 0;font-size:11px}
   .mun-bar{height:8px;background:#EEF3EC;border-radius:999px;overflow:hidden}
   .mun-bar span{display:block;height:100%;background:var(--green);border-radius:999px}
@@ -267,68 +245,54 @@
       <li>
         <span class="n">3</span>
         <div class="how-body">
-          <b>Onde o produto perde</b>
-          <p>É o espelho do card anterior: quanto cada eixo ainda deixa de alcançar do máximo. O eixo com a barra mais longa é a maior oportunidade de ganho.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n">4</span>
-        <div class="how-body">
-          <b>Como o índice se espalha</b>
-          <p>Agrupa as empresas por faixa do índice (0–20, 21–40…). Mostra se a base está concentrada em pontuações baixas, com a mediana destacada no centro do gráfico.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n">5</span>
-        <div class="how-body">
           <b>Trajetória até 2028</b>
           <p>Simula o índice em três ritmos de adoção de critérios (conservador, base e acelerado) até 2028, comparado à meta. É simulação, não previsão.</p>
         </div>
       </li>
       <li>
-        <span class="n">6</span>
+        <span class="n">4</span>
         <div class="how-body">
           <b>Migração de faixas</b>
           <p>Mostra como as empresas mudariam de faixa do índice entre hoje (2026) e 2028 no cenário base — por exemplo, se a faixa 0–20 se esvaziaria.</p>
         </div>
       </li>
       <li>
-        <span class="n">7</span>
+        <span class="n">5</span>
         <div class="how-body">
           <b>Potencial por eixo</b>
           <p>Quanto o índice ganharia, em pontos percentuais, se todas as empresas chegassem a 3/3 em cada eixo. A linha tracejada marca o que falta para a meta.</p>
         </div>
       </li>
       <li>
-        <span class="n">8</span>
+        <span class="n">6</span>
         <div class="how-body">
           <b>Onde o piloto está</b>
           <p>Distribui os relatórios completos por município e traz a cobertura da amostra em relação ao universo de empresas de moda.</p>
         </div>
       </li>
       <li>
-        <span class="n">9</span>
+        <span class="n">7</span>
         <div class="how-body">
           <b>Hipóteses de alavanca</b>
           <p>Ideias de intervenção por eixo que o piloto sugere olhar. São hipóteses para validar com a área de política — não é prescrição.</p>
         </div>
       </li>
       <li>
-        <span class="n">10</span>
+        <span class="n">8</span>
         <div class="how-body">
           <b>Confiança do dado</b>
           <p>Resume o que sustenta e o que fragiliza a leitura: cobertura, lacunas, divergências e a ausência de identificação de empresas.</p>
         </div>
       </li>
       <li>
-        <span class="n">11</span>
+        <span class="n">9</span>
         <div class="how-body">
           <b>Onde a ação se concentra</b>
           <p>Top 5 áreas por volume de recomendações. Mostra para onde a agenda prática do piloto mais aponta — e o peso do “produto” nela.</p>
         </div>
       </li>
       <li>
-        <span class="n">12</span>
+        <span class="n">10</span>
         <div class="how-body">
           <b>Leituras estratégicas (3 cards)</b>
           <p>Três sínteses qualitativas geradas sobre os mesmos dados: contradições e riscos que os gráficos não enunciam sozinhos (processo × produto, comunicação sem lastro, meta batida pelas alavancas mais baratas). São hipóteses de leitura — não dado nem previsão; validar em campo.</p>
@@ -343,7 +307,7 @@
 <script>
 const DATA = {
   regional: {
-    n: 15, index: 31.1, median: 33, le40: 86.7,
+    n: 15, index: 31.1, median: 33,
     bands: [
       {label:"0–20", n:3}, {label:"21–40", n:10}, {label:"41–60", n:2},
       {label:"61–80", n:0}, {label:"81–100", n:0}
@@ -351,11 +315,11 @@ const DATA = {
     indices: [40,33,60,13,33,27,47,27,33,27,7,40,27,20,33],
     signals: {desmontagem:20.0, reciclagem:6.7, informacao:93.3, rastreabilidade:0.0, posvenda:0.0},
     axes: [
-      {name:"Entrada", pct:17.8, lost:82.2},
-      {name:"Gestão de Resíduo", pct:73.3, lost:26.7},
-      {name:"Saída do Produto", pct:13.3, lost:86.7},
-      {name:"Vida do Produto", pct:20.0, lost:80.0},
-      {name:"Monitoramento", pct:31.1, lost:68.9}
+      {name:"Entrada", pct:17.8},
+      {name:"Gestão de Resíduo", pct:73.3},
+      {name:"Saída do Produto", pct:13.3},
+      {name:"Vida do Produto", pct:20.0},
+      {name:"Monitoramento", pct:31.1}
     ],
     municipalities: {Brusque:10, Gaspar:3, Ilhota:1, Guabiruba:1},
     coverage: "0,20% das matrizes de moda de Brusque. Universo regional pendente.",
@@ -368,7 +332,7 @@ const DATA = {
     ]
   },
   brusque: {
-    n: 10, index: 26.0, median: 27, le40: 100.0,
+    n: 10, index: 26.0, median: 27,
     bands: [
       {label:"0–20", n:3}, {label:"21–40", n:7}, {label:"41–60", n:0},
       {label:"61–80", n:0}, {label:"81–100", n:0}
@@ -376,11 +340,11 @@ const DATA = {
     indices: [33,13,33,27,33,27,7,40,27,20],
     signals: {desmontagem:20.0, reciclagem:10.0, informacao:90.0, rastreabilidade:0.0, posvenda:0.0},
     axes: [
-      {name:"Entrada", pct:6.7, lost:93.3},
-      {name:"Gestão de Resíduo", pct:60.0, lost:40.0},
-      {name:"Saída do Produto", pct:13.3, lost:86.7},
-      {name:"Vida do Produto", pct:20.0, lost:80.0},
-      {name:"Monitoramento", pct:30.0, lost:70.0}
+      {name:"Entrada", pct:6.7},
+      {name:"Gestão de Resíduo", pct:60.0},
+      {name:"Saída do Produto", pct:13.3},
+      {name:"Vida do Produto", pct:20.0},
+      {name:"Monitoramento", pct:30.0}
     ],
     municipalities: {Brusque:10},
     coverage: "0,18% das matrizes de moda de Brusque. Universo regional pendente.",
@@ -436,41 +400,6 @@ function scorecard(d){
       </div>`).join("")}
     </div>
     <p class="fine">Os cinco eixos estão sempre presentes e agora todos têm nota, calculada a partir das respostas do instrumento (15 critérios).</p>
-  </section>`;
-}
-
-function gaps(d){
-  return `<section class="card c4">
-    ${cardTop("Diagnóstico","Onde o produto perde")}
-    <p class="muted">Percentual de perda em relação ao máximo de cada eixo.</p>
-    ${d.axes.map(a=>`<div class="gap-row ${a.lost===null?"is-nd":""}">
-      <div class="gap-head"><span>${a.name}</span><b>${a.lost===null?"—":fmt1(a.lost)+"%"}</b></div>
-      <div class="gap-bar"><span style="width:${a.lost===null?0:a.lost}%"></span></div>
-      <div class="gap-note">${a.lost===null?"sem nota separada":"perdido"}</div>
-    </div>`).join("")}
-    <p class="fine">Perda calculada sobre o máximo de 3 pontos por eixo. Resíduo é o eixo com menor perda.</p>
-  </section>`;
-}
-
-function distribution(d){
-  let acc=0; const stops=[];
-  d.bands.forEach((b,i)=>{
-    const start=acc; acc += b.n/d.n*100;
-    if(b.n>0) stops.push(`${BAND_COLORS[i]} ${start}% ${acc}%`);
-  });
-  const bg = stops.length ? `conic-gradient(${stops.join(",")})` : "#EEF3EC";
-  return `<section class="card c4">
-    ${cardTop("Distribuição","Como o índice se espalha",`${fmt1(d.le40)}% ≤ 40`)}
-    <p class="muted">Percentual de empresas por faixa do índice.</p>
-    <div class="donut-wrap">
-      <div class="donut" style="background:${bg}" role="img" aria-label="Distribuição percentual do índice">
-        <div class="donut-center"><b>${d.median}%</b><small>mediana</small></div>
-      </div>
-      <div class="donut-legend">
-        ${d.bands.map((b,i)=>`<div class="row"><i style="background:${BAND_COLORS[i]}"></i><span>${b.label}</span><b>${fmt1(b.n/d.n*100)}%</b></div>`).join("")}
-      </div>
-    </div>
-    <div class="dist-foot"><span>mediana <b>${d.median}%</b></span><span>escala 0–100%</span></div>
   </section>`;
 }
 
@@ -646,7 +575,7 @@ function render(view){
   subtitle.textContent = view==="regional"
     ? "Região de Brusque · Brusque, Gaspar, Ilhota e Guabiruba"
     : "Brusque · recorte do piloto regional";
-  app.innerHTML = hero(d,view)+scorecard(d)+gaps(d)+distribution(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+recommendations(d,view)+strategic(d);
+  app.innerHTML = hero(d,view)+scorecard(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+recommendations(d,view)+strategic(d);
   document.querySelectorAll(".seg-btn").forEach(b=>{
     const on=b.dataset.view===view;
     b.classList.toggle("is-active",on);
