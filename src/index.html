@@ -86,13 +86,6 @@
   .area-meta strong{color:var(--ink);font-size:13px}
   .loss{color:var(--red);font-weight:800}
 
-
-  .prio-axis{margin-top:12px;display:flex;flex-direction:column;gap:5px}
-  .pa-title{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;margin-bottom:2px}
-  .pa-row{display:grid;grid-template-columns:1fr 82px 38px;gap:6px;align-items:center;font-size:9px;color:var(--muted)}
-  .pa-bar{height:6px;background:#FFFFFFA8;border-radius:999px;overflow:hidden}
-  .pa-bar span{display:block;height:100%;background:var(--green);border-radius:999px}
-  .pa-row b{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
   .axis-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
   .axis-tile{background:#F7FAF5;border:1px solid var(--line);border-radius:14px;padding:12px 10px;min-height:126px;display:flex;flex-direction:column;gap:7px}
   .axis-tile.is-nd{background:#F1F4F0;border-style:dashed}
@@ -124,12 +117,6 @@
   .dist-bar span{display:block;height:100%;border-radius:999px}
   .dist-n{text-align:right;font-weight:800;color:var(--ink)}
   .dist-foot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:9px;margin-top:9px;font-size:11px;color:var(--muted)}
-  .prio{background:var(--lav)}
-  .prio-big{font-size:40px;font-weight:800;line-height:1;margin-top:4px;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
-  .stack{display:flex;height:10px;border-radius:999px;overflow:hidden;background:#fff;margin-top:12px}
-  .stack span{display:block;height:100%}
-  .stack-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;margin-top:7px;color:var(--muted)}
-  .stack-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}
   .mun-row{display:grid;grid-template-columns:82px 1fr 22px;gap:8px;align-items:center;margin:8px 0;font-size:11px}
   .mun-bar{height:8px;background:#EEF3EC;border-radius:999px;overflow:hidden}
   .mun-bar span{display:block;height:100%;background:var(--green);border-radius:999px}
@@ -294,61 +281,54 @@
       <li>
         <span class="n">5</span>
         <div class="how-body">
-          <b>Tipo de ação</b>
-          <p>Classifica as recomendações por prazo — curto, médio, longo e não informado. O número em destaque é a fatia de ações de curto prazo, com a abertura por eixo logo abaixo.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n">6</span>
-        <div class="how-body">
           <b>Trajetória até 2028</b>
           <p>Simula o índice em três ritmos de adoção de critérios (conservador, base e acelerado) até 2028, comparado à meta. É simulação, não previsão.</p>
         </div>
       </li>
       <li>
-        <span class="n">7</span>
+        <span class="n">6</span>
         <div class="how-body">
           <b>Migração de faixas</b>
           <p>Mostra como as empresas mudariam de faixa do índice entre hoje (2026) e 2028 no cenário base — por exemplo, se a faixa 0–20 se esvaziaria.</p>
         </div>
       </li>
       <li>
-        <span class="n">8</span>
+        <span class="n">7</span>
         <div class="how-body">
           <b>Potencial por eixo</b>
           <p>Quanto o índice ganharia, em pontos percentuais, se todas as empresas chegassem a 3/3 em cada eixo. A linha tracejada marca o que falta para a meta.</p>
         </div>
       </li>
       <li>
-        <span class="n">9</span>
+        <span class="n">8</span>
         <div class="how-body">
           <b>Onde o piloto está</b>
           <p>Distribui os relatórios completos por município e traz a cobertura da amostra em relação ao universo de empresas de moda.</p>
         </div>
       </li>
       <li>
-        <span class="n">10</span>
+        <span class="n">9</span>
         <div class="how-body">
           <b>Hipóteses de alavanca</b>
           <p>Ideias de intervenção por eixo que o piloto sugere olhar. São hipóteses para validar com a área de política — não é prescrição.</p>
         </div>
       </li>
       <li>
-        <span class="n">11</span>
+        <span class="n">10</span>
         <div class="how-body">
           <b>Confiança do dado</b>
           <p>Resume o que sustenta e o que fragiliza a leitura: cobertura, lacunas, divergências e a ausência de identificação de empresas.</p>
         </div>
       </li>
       <li>
-        <span class="n">12</span>
+        <span class="n">11</span>
         <div class="how-body">
           <b>Onde a ação se concentra</b>
           <p>Top 5 áreas por volume de recomendações. Mostra para onde a agenda prática do piloto mais aponta — e o peso do “produto” nela.</p>
         </div>
       </li>
       <li>
-        <span class="n">13</span>
+        <span class="n">12</span>
         <div class="how-body">
           <b>Leituras estratégicas (3 cards)</b>
           <p>Três sínteses qualitativas geradas sobre os mesmos dados: contradições e riscos que os gráficos não enunciam sozinhos (processo × produto, comunicação sem lastro, meta batida pelas alavancas mais baratas). São hipóteses de leitura — não dado nem previsão; validar em campo.</p>
@@ -377,14 +357,6 @@ const DATA = {
       {name:"Vida do Produto", pct:20.0, lost:80.0},
       {name:"Monitoramento", pct:31.1, lost:68.9}
     ],
-    prio: {curto:37, medio:125, longo:60, na:1},
-    prioByAxis: [
-      {name:"Entrada", curto:0.0},
-      {name:"Gestão de Resíduo", curto:0.0},
-      {name:"Saída do Produto", curto:0.0},
-      {name:"Vida do Produto", curto:15.1},
-      {name:"Monitoramento", curto:49.2}
-    ],
     municipalities: {Brusque:10, Gaspar:3, Ilhota:1, Guabiruba:1},
     coverage: "0,20% das matrizes de moda de Brusque. Universo regional pendente.",
     recos: [
@@ -410,14 +382,6 @@ const DATA = {
       {name:"Vida do Produto", pct:20.0, lost:80.0},
       {name:"Monitoramento", pct:30.0, lost:70.0}
     ],
-    prio: {curto:23, medio:80, longo:40, na:1},
-    prioByAxis: [
-      {name:"Entrada", curto:0.0},
-      {name:"Gestão de Resíduo", curto:0.0},
-      {name:"Saída do Produto", curto:0.0},
-      {name:"Vida do Produto", curto:11.8},
-      {name:"Monitoramento", curto:48.7}
-    ],
     municipalities: {Brusque:10},
     coverage: "0,18% das matrizes de moda de Brusque. Universo regional pendente.",
     recos: [
@@ -431,7 +395,6 @@ const DATA = {
 };
 const TARGET = 45;
 const BAND_COLORS = ["#BE534B","#C98A2E","#8FC3A2","#C9E7D2","#E2EAE0"];
-const PRIO_COLORS = {curto:"#3F7A5C", medio:"#C98A2E", longo:"#9FB8AD", na:"#DDE7DC"};
 
 const app = document.getElementById("app");
 const subtitle = document.getElementById("subtitle");
@@ -508,35 +471,6 @@ function distribution(d){
       </div>
     </div>
     <div class="dist-foot"><span>mediana <b>${d.median}%</b></span><span>escala 0–100%</span></div>
-  </section>`;
-}
-
-function priorities(d){
-  const p=d.prio, total=p.curto+p.medio+p.longo+p.na;
-  const pct=v=>total? v/total*100:0;
-  const shortPct=pct(p.curto);
-  return `<section class="card prio c4">
-    ${cardTop("Ação","Tipo de ação",`${fmt1(shortPct)}% curto`)}
-    <div class="prio-big">${fmt1(shortPct)}%</div>
-    <p class="muted">das recomendações são de curto prazo.</p>
-    <div class="stack" aria-hidden="true">
-      <span style="width:${pct(p.curto)}%;background:${PRIO_COLORS.curto}"></span>
-      <span style="width:${pct(p.medio)}%;background:${PRIO_COLORS.medio}"></span>
-      <span style="width:${pct(p.longo)}%;background:${PRIO_COLORS.longo}"></span>
-      <span style="width:${pct(p.na)}%;background:${PRIO_COLORS.na}"></span>
-    </div>
-    <div class="stack-legend">
-      <span><i style="background:${PRIO_COLORS.curto}"></i>Curto ${fmt1(pct(p.curto))}%</span>
-      <span><i style="background:${PRIO_COLORS.medio}"></i>Médio ${fmt1(pct(p.medio))}%</span>
-      <span><i style="background:${PRIO_COLORS.longo}"></i>Longo ${fmt1(pct(p.longo))}%</span>
-      <span><i style="background:${PRIO_COLORS.na}"></i>Não inf. ${fmt1(pct(p.na))}%</span>
-    </div>
-    <div class="prio-axis">
-      <div class="pa-title">Curto prazo por eixo</div>
-      ${d.prioByAxis.map(a=>`<div class="pa-row"><span>${a.name}</span><div class="pa-bar"><span style="width:${a.curto}%"></span></div><b>${fmt1(a.curto)}%</b></div>`).join("")}
-    </div>
-    <div class="insight" style="margin-top:auto"><b>Leitura:</b> ${fmt1(shortPct)}% das ações são de curto prazo; a agenda é predominantemente de médio prazo.</div>
-    <p class="fine" style="margin-top:8px">Prioridade é do template da recomendação, não urgência da empresa. Monitoramento concentra a maior parte das ações curtas.</p>
   </section>`;
 }
 
@@ -712,7 +646,7 @@ function render(view){
   subtitle.textContent = view==="regional"
     ? "Região de Brusque · Brusque, Gaspar, Ilhota e Guabiruba"
     : "Brusque · recorte do piloto regional";
-  app.innerHTML = hero(d,view)+scorecard(d)+gaps(d)+distribution(d)+priorities(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+recommendations(d,view)+strategic(d);
+  app.innerHTML = hero(d,view)+scorecard(d)+gaps(d)+distribution(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+recommendations(d,view)+strategic(d);
   document.querySelectorAll(".seg-btn").forEach(b=>{
     const on=b.dataset.view===view;
     b.classList.toggle("is-active",on);
