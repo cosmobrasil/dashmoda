@@ -37,7 +37,7 @@
   :focus-visible{outline:3px solid #7FB89B;outline-offset:2px}
   .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px;align-items:stretch}
   .card{background:var(--card);border:1px solid #000;border-radius:var(--radius);padding:20px;box-shadow:0 0 0 .2px #000,var(--shadow);min-width:0;display:flex;flex-direction:column}
-  .c5{grid-column:span 5}.c7{grid-column:span 7}.c4{grid-column:span 4}.c3{grid-column:span 3}.c12{grid-column:span 12}
+  .c5{grid-column:span 5}.c7{grid-column:span 7}.c6{grid-column:span 6}.c4{grid-column:span 4}.c3{grid-column:span 3}.c12{grid-column:span 12}
   .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px}
   .card h2{font-size:15px;line-height:1.2;margin:0;font-weight:800;letter-spacing:-.015em}
   .muted{color:var(--muted);font-size:12px;line-height:1.45;margin:0}
@@ -103,10 +103,6 @@
   .lever:first-of-type{border-top:0}
   .lever-tag{font-size:10px;font-weight:800;color:var(--green);background:#EFF6EE;border:1px solid var(--line);border-radius:999px;padding:4px 6px;text-align:center}
   .lever p{margin:0;line-height:1.35}
-  .q-list{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:8px}
-  .q-list li{display:flex;gap:7px;font-size:10.5px;line-height:1.35;color:var(--muted)}
-  .q-list i{width:7px;height:7px;border-radius:50%;margin-top:4px;flex:none;background:var(--green)}
-  .q-list i.warn{background:var(--amber)}.q-list i.bad{background:var(--red)}
   footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:18px;padding-top:12px;font-size:10px;line-height:1.45;color:var(--muted)}
   footer b{color:var(--ink)}
   dialog{border:0;padding:0;background:transparent;max-width:760px;width:calc(100% - 36px)}
@@ -174,6 +170,7 @@
   @media (max-width:1100px){
     .axis-grid{grid-template-columns:repeat(3,1fr)}
     .c5,.c7{grid-column:span 12}
+    .c6{grid-column:span 6}
     .c4{grid-column:span 6}
     .c3{grid-column:span 6}
   }
@@ -182,7 +179,7 @@
     .header{align-items:flex-start;flex-direction:column}
     h1{font-size:28px}
     .tools{justify-content:flex-start}
-    .c4,.c3{grid-column:span 12}
+    .c6,.c4,.c3{grid-column:span 12}
     .hero .big{font-size:64px}
     .matrix{grid-template-columns:72px repeat(var(--cols),1fr)}
     .axis-grid{grid-template-columns:repeat(2,1fr)}
@@ -281,19 +278,12 @@
       <li>
         <span class="n">8</span>
         <div class="how-body">
-          <b>Confiança do dado</b>
-          <p>Resume o que sustenta e o que fragiliza a leitura: cobertura, lacunas, divergências e a ausência de identificação de empresas.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n">9</span>
-        <div class="how-body">
           <b>Onde a ação se concentra</b>
           <p>Top 5 áreas por volume de recomendações. Mostra para onde a agenda prática do piloto mais aponta — e o peso do “produto” nela.</p>
         </div>
       </li>
       <li>
-        <span class="n">10</span>
+        <span class="n">9</span>
         <div class="how-body">
           <b>Leituras estratégicas (3 cards)</b>
           <p>Três sínteses qualitativas geradas sobre os mesmos dados: contradições e riscos que os gráficos não enunciam sozinhos (processo × produto, comunicação sem lastro, meta batida pelas alavancas mais baratas). São hipóteses de leitura — não dado nem previsão; validar em campo.</p>
@@ -487,7 +477,7 @@ function potential(d){
 function territory(d,view){
   const entries=Object.entries(d.municipalities);
   const total=entries.reduce((a,[,n])=>a+n,0);
-  return `<section class="card c5">
+  return `<section class="card c6">
     ${cardTop("Território","Onde o piloto está",view==="regional"?"Região":"Brusque")}
     <p class="muted">Distribuição percentual dos relatórios completos por município.</p>
     <div style="margin-top:6px">
@@ -519,7 +509,7 @@ function recommendations(d,view){
 }
 
 function levers(){
-  return `<section class="card c4">
+  return `<section class="card c6">
     ${cardTop("Para discussão","Alavanca Competitiva","não é prescrição")}
     <p class="muted">O que o piloto sugere olhar. Validar com a governança.</p>
     <div class="lever"><span class="lever-tag">Entrada</span><p>Fornecedores de materiais reciclados/renováveis, compra coletiva e design.</p></div>
@@ -527,20 +517,6 @@ function levers(){
     <div class="lever"><span class="lever-tag">Saída</span><p>Design para desmontagem, logística reversa e retorno.</p></div>
     <div class="lever"><span class="lever-tag">Vida</span><p>Durabilidade, reparabilidade e reuso.</p></div>
     <div class="lever"><span class="lever-tag">Monitor.</span><p>Rastreabilidade e pós-venda.</p></div>
-  </section>`;
-}
-
-function quality(d,view){
-  return `<section class="card c3">
-    ${cardTop("Qualidade","Confiança do dado")}
-    <ul class="q-list">
-      <li><i class="ok"></i>71% dos relatórios completos; 24% simplificados fora do índice.</li>
-      <li><i class="ok"></i>Cinco eixos com nota, a partir das respostas do instrumento.</li>
-      <li><i class="bad"></i>Divergência de CNPJ (FRANCO/TEXFAN).</li>
-      <li><i class="bad"></i>Sem série, porte confiável ou benchmark oficial.</li>
-      <li><i class="ok"></i>Nenhuma empresa identificada.</li>
-    </ul>
-    <p class="fine" style="margin-top:auto">${view==="regional"?"IC95% ≈ 23,9%–38,3% se amostra aleatória — não é. Leia como piloto.":"Leitura ainda mais frágil no recorte municipal. Piloto, não setor."}</p>
   </section>`;
 }
 
@@ -576,7 +552,7 @@ function render(view){
   subtitle.textContent = view==="regional"
     ? "Região de Brusque · Brusque, Gaspar, Ilhota e Guabiruba"
     : "Brusque · recorte do piloto regional";
-  app.innerHTML = hero(d,view)+scorecard(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+quality(d,view)+recommendations(d,view)+strategic(d);
+  app.innerHTML = hero(d,view)+scorecard(d)+scenarios(d)+migration(d)+potential(d)+territory(d,view)+levers()+recommendations(d,view)+strategic(d);
   document.querySelectorAll(".seg-btn").forEach(b=>{
     const on=b.dataset.view===view;
     b.classList.toggle("is-active",on);
