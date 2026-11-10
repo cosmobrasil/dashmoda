@@ -285,8 +285,8 @@
       <li>
         <span class="n">9</span>
         <div class="how-body">
-          <b>Leituras estratégicas (3 cards)</b>
-          <p>Três sínteses qualitativas geradas sobre os mesmos dados: contradições e riscos que os gráficos não enunciam sozinhos (processo × produto, comunicação de circularidade, meta batida pelas alavancas mais baratas). São hipóteses de leitura — não dado nem previsão; validar em campo.</p>
+          <b>Leituras estratégicas (2 cards)</b>
+          <p>Duas sínteses qualitativas geradas sobre os mesmos dados: contradições e riscos que os gráficos não enunciam sozinhos (processo × produto, comunicação de circularidade). São hipóteses de leitura — não dado nem previsão; validar em campo.</p>
         </div>
       </li>
     </ol>
@@ -522,28 +522,19 @@ function levers(){
 
 function strategic(d){
   const res=d.axes.find(a=>a.name==="Gestão de Resíduo").pct;
-  const mon=d.axes.find(a=>a.name==="Monitoramento").pct;
   const s=d.signals;
-  const gap=Math.max(0,TARGET-d.index);
-  const monGain=20-mon/5, resGain=20-res/5;
   return `
-  <section class="card c4 strategy">
+  <section class="card c6 strategy">
     ${cardTop("IA · leitura estratégica · 01","Circularidade de processo, não de produto","síntese")}
     <p class="claim">A operação aprendeu a destinar resíduo; o produto ainda não foi projetado para voltar.</p>
     <p class="evidence"><b>${fmt1(res)}%</b> dos resíduos vão para reciclagem ou reuso, mas só <b>${fmt1(s.desmontagem)}%</b> dos produtos podem ser desmontados e <b>${fmt1(s.reciclagem)}%</b> reciclados.</p>
     <div class="move"><b>Movimento</b>Levar a competência de resíduo para o design: desmontagem e reciclabilidade como critério de projeto e de compra.</div>
   </section>
-  <section class="card c4 strategy">
+  <section class="card c6 strategy">
     ${cardTop("IA · leitura estratégica · 02","Comunicação de Circularidade","risco")}
     <p class="claim">O critério mais adotado é o mais barato — e o menos verificável.</p>
     <p class="evidence"><b>${fmt1(s.informacao)}%</b> informam composição e descarte ao consumidor; <b>${fmt1(s.rastreabilidade)}%</b> têm rastreabilidade e <b>${fmt1(s.posvenda)}%</b> pós-venda.</p>
     <div class="move"><b>Movimento</b>Condicionar a comunicação à rastreabilidade: sem lastro, informação vira greenwashing.</div>
-  </section>
-  <section class="card c4 strategy">
-    ${cardTop("IA · leitura estratégica · 03","A meta de circularidade pode ser batida sem tocar no produto","governança")}
-    <p class="claim">No limite, resíduo e monitoramento já entregam a meta — sem mexer em design nem matéria-prima.</p>
-    <p class="evidence">Monitoramento (<b>${fmt1(monGain)} p.p.</b>) + Gestão de Resíduo (<b>${fmt1(resGain)} p.p.</b>) somam <b>${fmt1(monGain+resGain)} p.p.</b>, acima do gap de <b>${fmt1(gap)} p.p.</b> até a meta.</p>
-    <div class="move"><b>Movimento</b>Definir pisos por eixo (ex.: Saída do Produto) para que o número agregado não seja cumprido pelas alavancas mais baratas.</div>
   </section>`;
 }
 
