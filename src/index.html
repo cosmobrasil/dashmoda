@@ -135,17 +135,12 @@
   .flegend{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin-top:8px}
   .flegend i{display:inline-block;width:9px;height:3px;border-radius:2px;margin-right:5px;vertical-align:3px}
   .flegend b{color:var(--ink);font-variant-numeric:tabular-nums}
-  .mig{display:flex;flex-direction:column;gap:9px;margin-top:10px}
-  .mig-row{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center}
-  .mig-year{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.04em}
-  .mig-bar{display:flex;height:24px;border-radius:9px;overflow:hidden;background:#EEF3EC}
-  .mig-bar span{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;overflow:hidden;white-space:nowrap;min-width:0}
-  .mig-bar span.dark{color:var(--ink)}
-  .mig-legend{display:flex;flex-direction:column;gap:5px;margin-top:12px;font-size:10px;color:var(--muted)}
-  .mig-legend .row{display:grid;grid-template-columns:8px 1fr 46px 10px 46px;gap:5px;align-items:center}
-  .mig-legend i{width:8px;height:8px;border-radius:2px}
-  .mig-legend b{color:var(--ink);font-variant-numeric:tabular-nums}
-  .mig-legend .arrow{text-align:center;color:var(--muted)}
+  .mig{margin-top:10px}
+  .mig svg{width:100%;height:auto;display:block}
+  .mig-yr{font-size:11px;font-weight:800;fill:var(--muted);text-anchor:middle;letter-spacing:.06em}
+  .mig-band{font-size:10px;font-weight:800}
+  .mig-n{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}
+  .mig-rib-n{font-size:10px;font-weight:800;fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:3px}
   .pot{position:relative;margin-top:12px;padding-top:14px}
   .pot-line{position:absolute;top:16px;bottom:2px;border-left:1.2px dashed var(--red);opacity:.75}
   .pot-line small{position:absolute;top:-13px;left:4px;font-size:8px;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.02em}
@@ -251,7 +246,7 @@
         <span class="n">4</span>
         <div class="how-body">
           <b>Migração de faixas</b>
-          <p>Mostra como as empresas mudariam de faixa do índice entre hoje (2026) e 2028 no cenário base — por exemplo, se a faixa 0–20 se esvaziaria.</p>
+          <p>As faixas do índice à esquerda (2026) fluem para a direita (2028): cada fita colorida mostra quantas empresas sobem de uma faixa para a seguinte no cenário base. Exemplo: a faixa 0–20 se esvazia e a 21–40 vira a porta de entrada.</p>
         </div>
       </li>
       <li>
@@ -349,7 +344,8 @@ const DATA = {
   }
 };
 const TARGET = 45;
-const BAND_COLORS = ["#BE534B","#C98A2E","#8FC3A2","#C9E7D2","#E2EAE0"];
+const BAND_COLORS = ["#BE534B","#C98A2E","#9FB8AD","#3F7A5C","#2F6B50"];
+const BAND_TEXT = ["#fff","#1B2E24","#1B2E24","#fff","#fff"];
 
 const app = document.getElementById("app");
 const subtitle = document.getElementById("subtitle");
@@ -434,23 +430,60 @@ function scenarios(d){
 function migration(d){
   const gain=2*PP_PER_AXIS;
   const fut=d.indices.map(v=>Math.min(100,v+gain));
-  const f=[0,0,0,0,0]; fut.forEach(v=>f[bandOf(v)]++);
-  const now=d.bands.map(b=>b.n), total=d.n;
+  const from=d.indices.map(v=>bandOf(v));
+  const to=fut.map(v=>bandOf(v));
+  const now=d.bands.map(b=>b.n);
+  const futCount=[0,0,0,0,0]; fut.forEach(v=>futCount[bandOf(v)]++);
+  const flow=Array.from({length:5},()=>Array(5).fill(0));
+  from.forEach((b,i)=>flow[b][to[i]]++);
+  const nUp=from.filter((b,i)=>to[i]>b).length;
   const sorted=[...fut].sort((a,b)=>a-b);
   const med=sorted.length%2?sorted[(sorted.length-1)/2]:(sorted[sorted.length/2-1]+sorted[sorted.length/2])/2;
-  const seg=(n,color,dark)=>n?`<span class="${dark?"dark":""}" style="width:${(n/total*100).toFixed(2)}%;background:${color}">${n/total*100>=9?fmt1(n/total*100)+"%":""}</span>`:"";
+
+  const W=340,H=204,NL=96,ROW=30,GAP=5,TOP=30;
+  const RX1=NL, RX2=W-NL;
+  const rowY=i=>TOP+i*(ROW+GAP);
+  const bandRow=b=>4-b;
+  const cy=b=>rowY(bandRow(b))+ROW/2;
+  const labels=d.bands.map(b=>b.label);
+
+  const node=(x,b,count)=>{
+    const y=rowY(bandRow(b));
+    const on=count>0;
+    const tcol=on?BAND_TEXT[b]:"#5E6F64";
+    return `<rect x="${x}" y="${y}" width="${NL}" height="${ROW}" rx="8" fill="${on?BAND_COLORS[b]:"#EEF3EC"}" stroke="rgba(27,46,36,.08)"/>
+      <text class="mig-band" x="${x+9}" y="${y+ROW/2+3.5}" fill="${tcol}">${labels[b]}</text>
+      <text class="mig-n" x="${x+NL-9}" y="${y+ROW/2+4}" text-anchor="end" fill="${tcol}">${count}</text>`;
+  };
+
+  const ribbons=[];
+  for(let b=0;b<5;b++)for(let t=0;t<5;t++){
+    const c=flow[b][t];
+    if(!c)continue;
+    const yFrom=cy(b), yTo=cy(t), x1=RX1, x2=RX2, k=(x2-x1)*0.42;
+    const half=(4+c*1.4)/2, midX=(x1+x2)/2, midY=(yFrom+yTo)/2;
+    ribbons.push(`<path d="M ${x1} ${yFrom-half} C ${x1+k} ${yFrom-half}, ${x2-k} ${yTo-half}, ${x2} ${yTo-half} L ${x2} ${yTo+half} C ${x2-k} ${yTo+half}, ${x1+k} ${yFrom+half}, ${x1} ${yFrom+half} Z" fill="${BAND_COLORS[b]}" fill-opacity="0.92"/>
+      <text class="mig-rib-n" x="${midX}" y="${midY+3.5}">${c}</text>`);
+  }
+
+  const insight=nUp===d.n
+    ? `No cenário base, todas as ${d.n} empresas sobem uma faixa — a ${labels[0]} se esvazia e a mediana vai de ${d.median}% a ${fmt1(med)}%.`
+    : `No cenário base, ${nUp} de ${d.n} empresas sobem de faixa; a mediana vai de ${d.median}% a ${fmt1(med)}%.`;
+
   return `<section class="card c4">
     ${cardTop("Futuro · predição","Migração de faixas","cenário base")}
-    <p class="muted">Distribuição do índice hoje e em 2028 no cenário base.</p>
+    <p class="muted">Como as ${d.n} empresas mudam de faixa entre 2026 e 2028.</p>
     <div class="mig">
-      <div class="mig-row"><span class="mig-year">2026</span><div class="mig-bar">${now.map((n,i)=>seg(n,BAND_COLORS[i],i>=3)).join("")}</div></div>
-      <div class="mig-row"><span class="mig-year">2028</span><div class="mig-bar">${f.map((n,i)=>seg(n,BAND_COLORS[i],i>=3)).join("")}</div></div>
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Fluxo de migração de faixas entre 2026 e 2028">
+        <text class="mig-yr" x="${NL/2}" y="18">2026</text>
+        <text class="mig-yr" x="${RX2+NL/2}" y="18">2028</text>
+        ${d.bands.map((b,i)=>node(0,i,now[i])).join("")}
+        ${ribbons.join("")}
+        ${d.bands.map((b,i)=>node(RX2,i,futCount[i])).join("")}
+      </svg>
     </div>
-    <div class="mig-legend">
-      ${d.bands.map((b,i)=>`<div class="row"><i style="background:${BAND_COLORS[i]}"></i><span>${b.label}</span><b>${fmt1(now[i]/total*100)}%</b><span class="arrow">→</span><b>${fmt1(f[i]/total*100)}%</b></div>`).join("")}
-    </div>
-    <div class="insight" style="margin-top:10px"><b>Leitura:</b> toda a base sobe uma faixa — a 0–20 se esvazia e a mediana vai de ${d.median}% a ${fmt1(med)}%.</div>
-    <p class="fine" style="margin-top:auto">Cenário base: +1 ponto por empresa em 2 eixos (+13,3 p.p.). Simulação, não previsão.</p>
+    <div class="insight" style="margin-top:10px"><b>Leitura:</b> ${insight}</div>
+    <p class="fine" style="margin-top:auto">Cenário base: +1 ponto por empresa em 2 eixos (+${fmt1(gain)} p.p.). Simulação, não previsão.</p>
   </section>`;
 }
 
