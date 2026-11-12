@@ -246,7 +246,7 @@
         <span class="n">4</span>
         <div class="how-body">
           <b>Migração de faixas</b>
-          <p>As faixas do índice à esquerda (2026) fluem para a direita (2028): cada fita colorida mostra quantas empresas sobem de uma faixa para a seguinte no cenário base. Exemplo: a faixa 0–20 se esvazia e a 21–40 vira a porta de entrada.</p>
+          <p>As faixas do índice à esquerda (2026) fluem para a direita (2028): cada fita colorida mostra o percentual de empresas que sobe de uma faixa para a seguinte no cenário base. Exemplo: a faixa 0–20 se esvazia e a 21–40 vira a porta de entrada.</p>
         </div>
       </li>
       <li>
@@ -446,6 +446,7 @@ function migration(d){
   const bandRow=b=>4-b;
   const cy=b=>rowY(bandRow(b))+ROW/2;
   const labels=d.bands.map(b=>b.label);
+  const pct=n=>fmt1(n/d.n*100)+"%";
 
   const node=(x,b,count)=>{
     const y=rowY(bandRow(b));
@@ -453,7 +454,7 @@ function migration(d){
     const tcol=on?BAND_TEXT[b]:"#5E6F64";
     return `<rect x="${x}" y="${y}" width="${NL}" height="${ROW}" rx="8" fill="${on?BAND_COLORS[b]:"#EEF3EC"}" stroke="rgba(27,46,36,.08)"/>
       <text class="mig-band" x="${x+9}" y="${y+ROW/2+3.5}" fill="${tcol}">${labels[b]}</text>
-      <text class="mig-n" x="${x+NL-9}" y="${y+ROW/2+4}" text-anchor="end" fill="${tcol}">${count}</text>`;
+      <text class="mig-n" x="${x+NL-9}" y="${y+ROW/2+4}" text-anchor="end" fill="${tcol}">${pct(count)}</text>`;
   };
 
   const ribbons=[];
@@ -463,16 +464,16 @@ function migration(d){
     const yFrom=cy(b), yTo=cy(t), x1=RX1, x2=RX2, k=(x2-x1)*0.42;
     const half=(4+c*1.4)/2, midX=(x1+x2)/2, midY=(yFrom+yTo)/2;
     ribbons.push(`<path d="M ${x1} ${yFrom-half} C ${x1+k} ${yFrom-half}, ${x2-k} ${yTo-half}, ${x2} ${yTo-half} L ${x2} ${yTo+half} C ${x2-k} ${yTo+half}, ${x1+k} ${yFrom+half}, ${x1} ${yFrom+half} Z" fill="${BAND_COLORS[b]}" fill-opacity="0.92"/>
-      <text class="mig-rib-n" x="${midX}" y="${midY+3.5}">${c}</text>`);
+      <text class="mig-rib-n" x="${midX}" y="${midY+3.5}">${pct(c)}</text>`);
   }
 
   const insight=nUp===d.n
-    ? `No cenário base, todas as ${d.n} empresas sobem uma faixa — a ${labels[0]} se esvazia e a mediana vai de ${d.median}% a ${fmt1(med)}%.`
-    : `No cenário base, ${nUp} de ${d.n} empresas sobem de faixa; a mediana vai de ${d.median}% a ${fmt1(med)}%.`;
+    ? `No cenário base, 100% das empresas sobem uma faixa — a ${labels[0]} se esvazia e a mediana vai de ${d.median}% a ${fmt1(med)}%.`
+    : `No cenário base, ${pct(nUp)} das empresas sobem de faixa; a mediana vai de ${d.median}% a ${fmt1(med)}%.`;
 
   return `<section class="card c4">
     ${cardTop("Futuro · predição","Migração de faixas","cenário base")}
-    <p class="muted">Como as ${d.n} empresas mudam de faixa entre 2026 e 2028.</p>
+    <p class="muted">Como as empresas mudam de faixa entre 2026 e 2028 — em % do total.</p>
     <div class="mig">
       <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Fluxo de migração de faixas entre 2026 e 2028">
         <text class="mig-yr" x="${NL/2}" y="18">2026</text>
